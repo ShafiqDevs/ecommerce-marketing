@@ -1,10 +1,11 @@
+import CopyToClipBoard from '@/components/CopyToClipBoard';
 import { formatCurrency } from '@/lib/formatCurrency';
 import { imageUrl } from '@/lib/ImageUrl';
 import { getmyOrders } from '@/sanity/lib/orders/getmyOrders';
 import { auth } from '@clerk/nextjs/server';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
-import React from 'react';
+import React, { Suspense } from 'react';
 
 type Props = {};
 
@@ -32,10 +33,14 @@ export default async function Orders({}: Props) {
 									<div className='flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center mb-4'>
 										<div>
 											<p className='text-sm text-gray-600 mb-1 font-bold'>
-												order Number
+												Order Number
 											</p>
 											<p className='font-mono text-sm text-green-600 break-all'>
-												{order.orderNumber}
+												<Suspense>
+													<CopyToClipBoard
+														text={order.orderNumber ?? ''}
+													/>
+												</Suspense>
 											</p>
 										</div>
 										<div className='sm:text-right'>

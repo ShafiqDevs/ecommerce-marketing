@@ -7,6 +7,7 @@ import { SanityLive } from '@/sanity/lib/live';
 import { DisableDraftMode } from '@/components/DisableDraftMode';
 import { VisualEditing } from 'next-sanity';
 import { draftMode } from 'next/headers';
+import { Toaster } from '@/components/ui/toaster';
 
 const geistSans = localFont({
 	src: '../fonts/GeistVF.woff',
@@ -38,6 +39,7 @@ export default async function RootLayout({
 						<Header />
 						{children}
 					</main>
+					<Toaster />
 					<SanityLive />
 					{(await draftMode()).isEnabled && (
 						<>
